@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夏休みの宿題 進捗管理</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>夏休みの宿題 進捗管理</h1>
+    <p id="header-sub"></p>
+  </header>
+
+  <main>
+    <section class="overview">
+      <h2>全体の進み具合</h2>
+      <div class="overview-grid">
+        <div class="overview-stat">
+          <div class="value" id="stat-overall">0%</div>
+          <div class="label">全体進捗率</div>
+        </div>
+        <div class="overview-stat">
+          <div class="value" id="stat-days">-</div>
+          <div class="label">8/24まで残り</div>
+        </div>
+        <div class="overview-stat">
+          <div class="value" id="stat-pace">-</div>
+          <div class="label">1日に必要なペース</div>
+        </div>
+      </div>
+      <div class="overview-track"><div class="overview-fill" id="overview-fill" style="width:0%"></div></div>
+
+      <div class="category-list" id="category-list"></div>
+    </section>
+
+    <section class="add-form">
+      <h2>宿題を登録</h2>
+      <form id="homework-form">
+        <div class="field">
+          <label for="title">タイトル</label>
+          <input type="text" id="title" required placeholder="例: 読書感想文">
+        </div>
+        <div class="field">
+          <label for="category">カテゴリ</label>
+          <select id="category">
+            <option value="school">学校の宿題</option>
+            <option value="freestep">フリーステップ</option>
+            <option value="shingaku">進学くらぶ</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="subject">教科(任意)</label>
+          <input type="text" id="subject" placeholder="例: 国語">
+        </div>
+        <div class="field">
+          <label>進捗の入力方式</label>
+          <div class="mode-toggle" id="mode-toggle">
+            <button type="button" data-mode="percent" class="active">パーセント</button>
+            <button type="button" data-mode="count">件数(総数/実施数)</button>
+            <button type="button" data-mode="units">単元別(チェックリスト)</button>
+          </div>
+        </div>
+
+        <div id="units-editor" class="units-editor hidden">
+          <div id="units-editor-list"></div>
+          <button type="button" id="add-unit-btn" class="add-unit-btn">+ 単元を追加</button>
+        </div>
+
+        <button type="submit" class="submit-btn">登録する</button>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <h2>宿題一覧</h2>
+      <p class="list-hint">期限超過 → 進行中 → 未着手 → 完了 の順に並びます</p>
+      <p id="empty-message" class="empty-message">まだ宿題が登録されていません。</p>
+      <ul id="homework-list"></ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
