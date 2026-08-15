@@ -11,11 +11,11 @@ function mascotTopper(stage) {
   if (stage === "flower") {
     return `
       <line x1="14" y1="10" x2="14" y2="6.5" stroke="#4a7c2a" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="14" cy="1.9" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
-      <circle cx="16.47" cy="3.7" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
-      <circle cx="15.53" cy="6.6" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
-      <circle cx="12.47" cy="6.6" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
-      <circle cx="11.53" cy="3.7" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
+      <circle cx="14" cy="1.9" r="1.7" fill="#ffffff" stroke="#94a3b8" stroke-width="0.9"/>
+      <circle cx="16.47" cy="3.7" r="1.7" fill="#ffffff" stroke="#94a3b8" stroke-width="0.9"/>
+      <circle cx="15.53" cy="6.6" r="1.7" fill="#ffffff" stroke="#94a3b8" stroke-width="0.9"/>
+      <circle cx="12.47" cy="6.6" r="1.7" fill="#ffffff" stroke="#94a3b8" stroke-width="0.9"/>
+      <circle cx="11.53" cy="3.7" r="1.7" fill="#ffffff" stroke="#94a3b8" stroke-width="0.9"/>
       <circle cx="14" cy="4.5" r="1.3" fill="#fbbf24"/>
     `;
   }
