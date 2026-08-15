@@ -7,7 +7,12 @@ const CATEGORIES = [
   { key: "shingaku", label: "進学くらぶ", color: "var(--cat-shingaku)" },
 ];
 
-const STATUS_LABEL = { "not-started": "未着手", "in-progress": "進行中", done: "完了", overdue: "期限超過" };
+const STATUS_LABEL = {
+  "not-started": "🌱 未着手",
+  "in-progress": "🌿 進行中",
+  done: "🌸 完了",
+  overdue: "🥀 期限超過",
+};
 const STATUS_RANK = { overdue: 0, "in-progress": 1, "not-started": 2, done: 3 };
 
 function generateId() {

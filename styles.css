@@ -18,9 +18,9 @@
   --color-overdue: #e11d48;
   --color-overdue-soft: #fee9ee;
 
-  --cat-school: #4f46e5;
-  --cat-freestep: #d97706;
-  --cat-shingaku: #0d9488;
+  --cat-school: #e0483e;
+  --cat-freestep: #eab308;
+  --cat-shingaku: #3b82f6;
 
   --shadow-card: 0 1px 2px rgba(24,24,50,0.04), 0 6px 16px rgba(24,24,50,0.06);
 }
@@ -36,13 +36,15 @@ body {
 }
 
 header {
-  background: linear-gradient(135deg, #4f46e5 0%, #6d28d9 55%, #0d9488 130%);
+  background: linear-gradient(135deg, #2f9e44 0%, #40b46a 55%, #7cc142 130%);
   color: #fff;
-  padding: 2rem 1rem 2.4rem;
+  padding: 1.6rem 1rem 2.4rem;
   text-align: center;
 }
+.mascot-row { display:flex; justify-content:center; gap:0.5rem; margin-bottom:0.3rem; }
+.mascot-row svg { filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15)); }
 header h1 { margin: 0; font-size: 1.35rem; font-weight: 700; letter-spacing: 0.02em; }
-header p { margin: 0.35rem 0 0; font-size: 0.8rem; opacity: 0.85; }
+header p { margin: 0.35rem 0 0; font-size: 0.8rem; opacity: 0.9; }
 
 main {
   max-width: 640px;
