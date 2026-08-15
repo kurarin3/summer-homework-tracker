@@ -357,6 +357,21 @@ function render() {
     .forEach((item) => listEl.appendChild(renderItem(item)));
 }
 
+// Updates a single card's content without touching list order, so the item
+// the user just edited doesn't jump away before they see the result.
+function updateItemInPlace(id) {
+  const list = loadHomeworkList();
+  renderOverview(list);
+  const item = list.find((i) => i.id === id);
+  if (!item) return;
+  const oldLi = document.querySelector(`.homework-item[data-id="${id}"]`);
+  if (!oldLi) {
+    render();
+    return;
+  }
+  oldLi.replaceWith(renderItem(item));
+}
+
 // ---- registration form ----
 const form = document.getElementById("homework-form");
 const titleInput = document.getElementById("title");
@@ -454,7 +469,7 @@ listEl.addEventListener("click", (e) => {
     const key = `${unitHeader.dataset.itemId}:${unitHeader.dataset.unitIndex}`;
     if (manualToggle.has(key)) manualToggle.delete(key);
     else manualToggle.add(key);
-    render();
+    updateItemInPlace(unitHeader.dataset.itemId);
   }
 });
 
@@ -467,7 +482,7 @@ listEl.addEventListener("input", (e) => {
     if (item) {
       item.percent = Number(percentInput.value);
       saveHomeworkList(list);
-      render();
+      updateItemInPlace(id);
     }
     return;
   }
@@ -482,7 +497,7 @@ listEl.addEventListener("input", (e) => {
       if (countDone) item.count.done = Math.max(0, Number(countDone.value) || 0);
       if (countTotal) item.count.total = Math.max(0, Number(countTotal.value) || 0);
       saveHomeworkList(list);
-      render();
+      updateItemInPlace(id);
     }
   }
 });
@@ -496,7 +511,7 @@ listEl.addEventListener("change", (e) => {
   if (item) {
     item.units[Number(unitIndex)].items[Number(itemIndex)].done = checkbox.checked;
     saveHomeworkList(list);
-    render();
+    updateItemInPlace(itemId);
   }
 });
 
