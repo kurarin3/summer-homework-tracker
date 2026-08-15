@@ -2,10 +2,25 @@ const STORAGE_KEY = "summerHomeworkData_v2";
 const DEADLINE = "2026-08-24";
 
 const CATEGORIES = [
-  { key: "school", label: "学校の宿題", color: "var(--cat-school)" },
-  { key: "freestep", label: "フリーステップ", color: "var(--cat-freestep)" },
-  { key: "shingaku", label: "進学くらぶ", color: "var(--cat-shingaku)" },
+  { key: "school", label: "学校の宿題", color: "var(--cat-school)", hex: "#e0483e" },
+  { key: "freestep", label: "フリーステップ", color: "var(--cat-freestep)", hex: "#eab308" },
+  { key: "shingaku", label: "進学くらぶ", color: "var(--cat-shingaku)", hex: "#3b82f6" },
 ];
+
+function mascotSvg(hex, size) {
+  const h = Math.round(size * 1.21);
+  return `
+    <svg width="${size}" height="${h}" viewBox="0 0 28 34" xmlns="http://www.w3.org/2000/svg" class="mascot-icon" aria-hidden="true">
+      <line x1="14" y1="10" x2="14" y2="2" stroke="#4a7c2a" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="14" cy="1.5" rx="4" ry="2.3" fill="#8fe07a"/>
+      <ellipse cx="14" cy="22" rx="11" ry="12" fill="${hex}"/>
+      <circle cx="10" cy="20" r="1.6" fill="#2b2b2b"/>
+      <circle cx="18" cy="20" r="1.6" fill="#2b2b2b"/>
+      <ellipse cx="9" cy="33" rx="3.3" ry="1.8" fill="${hex}"/>
+      <ellipse cx="19" cy="33" rx="3.3" ry="1.8" fill="${hex}"/>
+    </svg>
+  `;
+}
 
 const STATUS_LABEL = {
   "not-started": "🌱 未着手",
@@ -237,7 +252,7 @@ function renderOverview(list) {
     const row = document.createElement("div");
     row.className = "category-row";
     row.innerHTML = `
-      <span class="category-dot" style="background:${cat.color}"></span>
+      ${mascotSvg(cat.hex, 18)}
       <span class="category-name">${cat.label}</span>
       <div class="category-track"><div class="category-fill" style="width:${pct}%; background:${cat.color}"></div></div>
       <span class="category-percent">${pct}%</span>
@@ -336,7 +351,8 @@ function renderItem(item) {
   li.dataset.id = item.id;
   li.innerHTML = `
     <div class="homework-item-header">
-      <div>
+      <div class="homework-avatar">${mascotSvg(cat.hex, 32)}</div>
+      <div class="homework-info">
         <p class="homework-title">${escapeHtml(item.title)}${modeBadge}<span class="status-badge ${status}">${STATUS_LABEL[status]}</span></p>
         <p class="homework-meta${status === "overdue" ? " overdue" : ""}">${metaParts.join(" ・ ")}</p>
       </div>
