@@ -2,17 +2,40 @@ const STORAGE_KEY = "summerHomeworkData_v2";
 const DEADLINE = "2026-08-24";
 
 const CATEGORIES = [
-  { key: "school", label: "学校の宿題", color: "var(--cat-school)", hex: "#e0483e" },
-  { key: "freestep", label: "フリーステップ", color: "var(--cat-freestep)", hex: "#eab308" },
-  { key: "shingaku", label: "進学くらぶ", color: "var(--cat-shingaku)", hex: "#3b82f6" },
+  { key: "school", label: "学校の宿題", color: "var(--cat-school)", hex: "#e0483e", stage: "leaf" },
+  { key: "freestep", label: "フリーステップ", color: "var(--cat-freestep)", hex: "#eab308", stage: "flower" },
+  { key: "shingaku", label: "進学くらぶ", color: "var(--cat-shingaku)", hex: "#3b82f6", stage: "bud" },
 ];
 
-function mascotSvg(hex, size) {
+function mascotTopper(stage) {
+  if (stage === "flower") {
+    return `
+      <line x1="14" y1="10" x2="14" y2="6.5" stroke="#4a7c2a" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="14" cy="1.9" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
+      <circle cx="16.47" cy="3.7" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
+      <circle cx="15.53" cy="6.6" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
+      <circle cx="12.47" cy="6.6" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
+      <circle cx="11.53" cy="3.7" r="1.7" fill="#ffffff" stroke="#e5e7eb" stroke-width="0.4"/>
+      <circle cx="14" cy="4.5" r="1.3" fill="#fbbf24"/>
+    `;
+  }
+  if (stage === "bud") {
+    return `
+      <line x1="14" y1="10" x2="14" y2="4" stroke="#4a7c2a" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="14" cy="2.2" rx="2.6" ry="3.6" fill="#f2a6c9"/>
+    `;
+  }
+  return `
+    <line x1="14" y1="10" x2="14" y2="2" stroke="#4a7c2a" stroke-width="2" stroke-linecap="round"/>
+    <ellipse cx="14" cy="1.5" rx="4" ry="2.3" fill="#8fe07a"/>
+  `;
+}
+
+function mascotSvg(hex, size, stage) {
   const h = Math.round(size * 1.21);
   return `
     <svg width="${size}" height="${h}" viewBox="0 0 28 34" xmlns="http://www.w3.org/2000/svg" class="mascot-icon" aria-hidden="true">
-      <line x1="14" y1="10" x2="14" y2="2" stroke="#4a7c2a" stroke-width="2" stroke-linecap="round"/>
-      <ellipse cx="14" cy="1.5" rx="4" ry="2.3" fill="#8fe07a"/>
+      ${mascotTopper(stage)}
       <ellipse cx="14" cy="22" rx="11" ry="12" fill="${hex}"/>
       <circle cx="10" cy="20" r="1.6" fill="#2b2b2b"/>
       <circle cx="18" cy="20" r="1.6" fill="#2b2b2b"/>
@@ -252,7 +275,7 @@ function renderOverview(list) {
     const row = document.createElement("div");
     row.className = "category-row";
     row.innerHTML = `
-      ${mascotSvg(cat.hex, 18)}
+      ${mascotSvg(cat.hex, 18, cat.stage)}
       <span class="category-name">${cat.label}</span>
       <div class="category-track"><div class="category-fill" style="width:${pct}%; background:${cat.color}"></div></div>
       <span class="category-percent">${pct}%</span>
@@ -351,7 +374,7 @@ function renderItem(item) {
   li.dataset.id = item.id;
   li.innerHTML = `
     <div class="homework-item-header">
-      <div class="homework-avatar">${mascotSvg(cat.hex, 32)}</div>
+      <div class="homework-avatar">${mascotSvg(cat.hex, 32, cat.stage)}</div>
       <div class="homework-info">
         <p class="homework-title">${escapeHtml(item.title)}${modeBadge}<span class="status-badge ${status}">${STATUS_LABEL[status]}</span></p>
         <p class="homework-meta${status === "overdue" ? " overdue" : ""}">${metaParts.join(" ・ ")}</p>
